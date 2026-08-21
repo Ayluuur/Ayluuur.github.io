@@ -5,14 +5,14 @@ url: 'https://www.zuehlke.cloud'
 baseurl: ''
 profilepic: '/images/tzuehlke.jpg'
 bkimage: '/images/bk1.jpg'
-google_analytics: UA-XXXXXX-X
-font_awesome: 'XXXXXXXXXX.js'
+google_analytics: xxx
+font_awesome: 'xxx'
 
 author:
   name: 'Thomas Zühlke'
   email: thomas@zuehlke.cloud
   mastodon: tzuehlke@mstdn.social
-  twitter_username: thomzuehlke
+#  twitter_username: thomzuehlke
 #  facebook_username: joshgerdes
   github_username:  tzuehlke
   linkedin_username:  thomas-zühlke-889182165
