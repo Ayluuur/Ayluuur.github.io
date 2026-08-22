@@ -89,6 +89,17 @@
             </li>
             {% endif %}
 
+            {% if site.author.github_page %}
+            <!-- Github Page -->
+            <li class="navigation__item">
+              <a href="https://{{ site.author.github_page }}.github.io" title="Meetup" target="_blank">
+                <!--<div style="font-size: 1.4rem;"><i class="fab fa-meetup fa-lg"></i></div>-->
+                <i class="fa-brands fa-meetup"></i>
+                <span class="label">Meetup</span>
+              </a>
+            </li>
+            {% endif %}
+
             {% if site.author.email %}
               <!-- Email -->
               <li class="navigation__item">
