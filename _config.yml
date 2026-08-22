@@ -15,6 +15,7 @@ author:
   github_username:  tzuehlke
   linkedin_username:  thomas-zühlke-889182165
   github_page: azurerostock
+  bluesky: tzuehlke.bsky.social
 
 # Build settings
 destination: _site

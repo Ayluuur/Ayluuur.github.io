@@ -23,13 +23,22 @@
           <nav class="cover-navigation navigation--social">
             <ul class="navigation">
 
-              <!-- https://mastodon.social/@tzuehlke@mstdn.social -->
             {% if site.author.mastodon %}
               <!-- Mastodon -->
               <li class="navigation__item">
                 <a href="https://mastodon.social/@{{ site.author.mastodon }}" title="@{{ site.author.mastodon }} on Mastodon" target="_blank">
                   <i class="fa-brands fa-mastodon"></i>
                   <span class="label">Mastodon</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% if site.author.bluesky %}
+              <!-- Bluesky -->
+              <li class="navigation__item">
+                <a href="https://bsky.app/profile/{{ site.author.bluesky }}" title="{{ site.author.bluesky }} on Bluesky" target="_blank">
+                  <i class="fa-brands fa-bluesky"></i>
+                  <span class="label">Bluesky</span>
                 </a>
               </li>
             {% endif %}
