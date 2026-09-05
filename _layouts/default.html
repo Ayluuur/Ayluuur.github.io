@@ -2,11 +2,12 @@
 <html>
   {% include head.html %}
 
-  <body>
+  <body class="{% if page.url == '/' %}is-home-page{% endif %}">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     {% include header.html %}
 
-    <div class="content-wrapper">
-      <div class="content-wrapper__inner">
+    <div class="content-wrapper{% if page.url != '/' %} showing{% endif %}">
+      <div class="content-wrapper__inner" id="main-content" tabindex="-1">
         {{ content }}
 
     

@@ -3,3 +3,5 @@ _site/
 .htaccess
 _config.yml
 .DS_Store
+assets/*.txt
+assets/projects/scene-motion/scene-motion-preview_x264.mp4

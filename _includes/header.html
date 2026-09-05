@@ -1,143 +1,45 @@
-<span class="mobile btn-mobile-menu">
-  <i class="fas fa-bars btn-mobile-menu__icon"></i>
-  <i class="far fa-times-circle btn-mobile-close__icon hidden"></i>
+<span class="mobile btn-mobile-menu" aria-label="Open navigation" role="button" tabindex="0">
+  <span class="btn-mobile-menu__icon">&#9776;</span>
+  <span class="btn-mobile-close__icon hidden">&#215;</span>
 </span>
 
-<header class="panel-cover" style="background-image: url({{ site.baseurl }}{{ site.bkimage }})">
+<header class="panel-cover{% if page.url != '/' %} panel-cover--collapsed{% endif %}" style="background-image: url({{ site.baseurl }}{{ site.bkimage }})">
   <div class="panel-main">
-
     <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
-        <a href="{{ site.baseurl }}/" title="link to home of {{ site.title }}">
-          <img src="{{ site.baseurl }}{{ site.profilepic }}" class="user-image" alt="My Profile Photo">
-          <h1 class="panel-cover__title panel-title">{{ site.title }}</h1>
+      <div class="panel-main__content">
+        <a href="{{ site.baseurl }}/" title="Home of {{ site.title }}">
+          <img src="{{ site.baseurl }}{{ site.profilepic }}" class="user-image" alt="Portrait of Yilun Sheng">
+          <h1 class="panel-cover__title panel-title">Yilun Sheng (&#30427;&#36920;&#20262;)</h1>
         </a>
         <hr class="panel-cover__divider">
-        <p class="panel-cover__description">Working at <a href="https://www.adesso.de/"><u>Adesso SE</u></a> as developer, consultant and architect for Azure <i class="fas fa-cloud"></i>.</p>
-        <img src="/images/azure-solutions-architect-expert.png" class="badge-image" alt="Azure Solution Architect Badge">
-        <img src="/images/iSAQB-ADVANCED_thomas-zuehlke_badge3.0.png" class="badge-image" alt="iSAQB Advanced Badge">
+        <p class="panel-cover__description">Master in NJUPT. Focuing on Virtual Reality and Maching Learning.</p>
         <hr class="panel-cover__divider panel-cover__divider--secondary">
 
         <div class="navigation-wrapper">
-
-          <nav class="cover-navigation navigation--social">
+          <nav class="cover-navigation cover-navigation--primary" aria-label="Page sections">
             <ul class="navigation">
-
-            {% if site.author.mastodon %}
-              <!-- Mastodon -->
-              <li class="navigation__item">
-                <a href="https://mastodon.social/@{{ site.author.mastodon }}" title="@{{ site.author.mastodon }} on Mastodon" target="_blank">
-                  <i class="fa-brands fa-mastodon"></i>
-                  <span class="label">Mastodon</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.bluesky %}
-              <!-- Bluesky -->
-              <li class="navigation__item">
-                <a href="https://bsky.app/profile/{{ site.author.bluesky }}" title="{{ site.author.bluesky }} on Bluesky" target="_blank">
-                  <i class="fa-brands fa-bluesky"></i>
-                  <span class="label">Bluesky</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.twitter_username %}
-              <!-- Twitter -->
-              <li class="navigation__item">
-                <a href="https://twitter.com/{{ site.author.twitter_username }}" title="@{{ site.author.twitter_username }} on Twitter" target="_blank">
-                  <!--<i class="icon icon-social-twitter"></i>-->
-                  <i class="fa-brands fa-twitter"></i>
-                  <span class="label">Twitter</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.facebook_username %}
-              <!-- Facebook -->
-              <li class="navigation__item">
-                <a href="http://fb.me/{{ site.author.facebook_username }}" title="{{ site.author.facebook_username }} on Facebook" target="_blank">
-                  <!--<i class="icon icon-social-facebook"></i>-->
-                  <i class="fa-brands fa-facebook"></i>
-                  <span class="label">Facebook</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.linkedin_username %}
-              <!-- LinkedIn -->
-              <li class="navigation__item">
-                <a href="https://www.linkedin.com/in/{{ site.author.linkedin_username }}" title="{{ site.author.linkedin_username }} on LinkedIn" target="_blank">
-                  <!--<i class="icon icon-social-linkedin"></i>-->
-                  <i class="fa-brands fa-linkedin"></i>
-                  <span class="label">LinkedIn</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.github_username %}
-              <!-- GitHub -->
-              <li class="navigation__item">
-                <a href="https://www.github.com/{{ site.author.github_username }}" title="{{ site.author.github_username }} on GitHub" target="_blank">
-                  <!--<i class="icon icon-social-github"></i>-->
-                  <i class="fa-brands fa-github"></i>
-                  <span class="label">GitHub</span>
-                </a>
-              </li>
-            {% endif %}
-
-            {% if site.author.meetup_name %}
-            <!-- Meetup -->
-            <li class="navigation__item">
-              <a href="https://www.meetup.com/{{ site.author.meetup_name }}" title="Meetup {{ site.author.meetup_name }}" target="_blank">
-                <!--<div style="font-size: 1.4rem;"><i class="fab fa-meetup fa-lg"></i></div>-->
-                <i class="fa-brands fa-meetup"></i>
-                <span class="label">Meetup</span>
-              </a>
-            </li>
-            {% endif %}
-
-            {% if site.author.github_page %}
-            <!-- Github Page -->
-            <li class="navigation__item">
-              <a href="https://{{ site.author.github_page }}.github.io" title="Meetup" target="_blank">
-                <!--<div style="font-size: 1.4rem;"><i class="fab fa-meetup fa-lg"></i></div>-->
-                <i class="fa-brands fa-meetup"></i>
-                <span class="label">Meetup</span>
-              </a>
-            </li>
-            {% endif %}
-
-            {% if site.author.email %}
-              <!-- Email -->
-              <li class="navigation__item">
-                <a href="mailto:{{ site.author.email }}" title="Email {{ site.author.email }}" target="_blank">
-                  <!--<i class="icon icon-mail"></i>-->
-                  <i class="fa-solid fa-envelope"></i>
-                  <span class="label">Email</span>
-                </a>
-              </li>
-            {% endif %}
-
-            </ul>
-          </nav>
-          
-          <!--<nav class="cover-navigation cover-navigation--primary">-->
-          <nav class="cover-navigation navigation--social">
-            <ul class="navigation">
-              <li class="navigation__item"><a href="https://blog.zuehlke.cloud" title="link to Blog"><i class="fa-solid fa-link"></i>&nbsp;Blog</a></li>
-              <!--<li class="navigation__item"><a href="{{ site.baseurl }}/#" title="link to Tweets" class="panel-button"><i class="icon icon-social-twitter"></i>&nbsp;Tweets</a></li>-->
-              <li class="navigation__item"><a href="{{ site.baseurl }}/#projects" title="List of Projects" class="panel-button projects-button"><i class="fa-solid fa-file-code"></i>&nbsp;Projects</a></li>
+              <li class="navigation__item"><a href="{{ site.baseurl }}/about/" class="page-link-button{% if page.url == '/about/' %} is-active{% endif %}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About Me</a></li>
+              <li class="navigation__item"><a href="{{ site.baseurl }}/portfolio/" class="page-link-button{% if page.url == '/portfolio/' %} is-active{% endif %}"{% if page.url == '/portfolio/' %} aria-current="page"{% endif %}>Portfolio</a></li>
             </ul>
           </nav>
 
+          <nav class="profile-links" aria-label="Personal links">
+            <a class="profile-link" href="https://www.google.com/maps/search/?api=1&amp;query=Nanjing%2C%20China" target="_blank" rel="noopener noreferrer">
+              <img src="{{ site.baseurl }}/images/icons/location.svg" alt=""> <span>Nanjing, China</span>
+            </a>
+            <a class="profile-link" href="mailto:yilun205@163.com">
+              <img src="{{ site.baseurl }}/images/icons/email.svg" alt=""> <span>Email</span>
+            </a>
+            <a class="profile-link" href="https://github.com/Ayluuur" target="_blank" rel="noopener noreferrer">
+              <img class="contact-icon--brand" src="{{ site.baseurl }}/images/icons/github.svg" alt=""> <span>GitHub</span>
+            </a>
+            <a class="profile-link" href="https://scholar.google.com/citations?hl=zh-CN&amp;view_op=list_works&amp;gmla=AKCpqFybEwAYiZfzMV1nQWcUaxl6iBbwZi4y6MFTo4nFWyWQH26FDOFGrrb804QMs1HE0p04C37Flu91q31wrtWjuYc&amp;user=PsK9BVkAAAAJ" target="_blank" rel="noopener noreferrer">
+              <img class="contact-icon--brand" src="{{ site.baseurl }}/images/icons/scholar.svg" alt=""> <span>Google Scholar</span>
+            </a>
+          </nav>
         </div>
-
       </div>
-
     </div>
-
     <div class="panel-cover--overlay"></div>
   </div>
 </header>

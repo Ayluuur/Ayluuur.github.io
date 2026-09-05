@@ -1,0 +1,148 @@
+---
+layout: default
+title: Portfolio | Yilun Sheng
+permalink: /portfolio/
+---
+
+<main class="portfolio-page">
+  <header class="page-hero">
+    <p class="page-hero__eyebrow">PORTFOLIO / SELECTED WORK</p>
+    <h2>Portfolio</h2>
+  </header>
+
+  <section class="page-section" aria-labelledby="projects-heading">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">SELECTED WORK</p>
+        <h3 id="projects-heading">Projects</h3>
+      </div>
+      <span class="section-count">03</span>
+    </div>
+    <div class="featured-project-grid">
+      <figure class="project-card">
+        <div class="project-card__media">
+          <img src="{{ site.baseurl }}/assets/MMG/MMG%20Demo%20only%20for%20work.gif" alt="MMG body and hand-object interaction motion generation demo" loading="lazy">
+          <span class="project-card__index">01</span>
+        </div>
+        <figcaption>
+          <h4>MMG: Holistic Motion Generation</h4>
+          <p>An academic demo for body and hand-object-interaction motion generation developed in Unity.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="project-card">
+        <div class="project-card__media">
+          <img src="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-preview.gif" alt="Human-scene interaction motion generation demo" loading="lazy">
+          <span class="project-card__index">02</span>
+        </div>
+        <figcaption>
+          <h4>Human&ndash;Scene Interaction Motion Generation</h4>
+          <p>An academic demo for human-scene-interaction motion generation developed in Unity.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="project-card">
+        <div class="project-card__media">
+          <div class="media-placeholder project-card__placeholder" role="img" aria-label="Placeholder for a VRChat avatar demo"></div>
+          <span class="project-card__index">03</span>
+        </div>
+        <figcaption>
+          <h4>Avatar Creations</h4>
+          <p>Expressive avatar models with a distinctive style and a range of custom features.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="page-section academic-section" aria-labelledby="academic-heading">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">RESEARCH / IMPLEMENTATION</p>
+        <h3 id="academic-heading">Academic Projects</h3>
+      </div>
+    </div>
+    <p class="section-intro">Projects that were made for the purposes of academic research and display relevant skills.</p>
+
+    <article class="academic-project" id="mmg-project">
+      <div class="academic-project__media">
+        <video controls playsinline preload="metadata" poster="{{ site.baseurl }}/images/mmg-teaser.png" aria-label="MMG project demo video">
+          <source src="{{ site.baseurl }}/assets/MMG/mmg-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="academic-project__content">
+        <p class="project-number">01 / ACADEMIC PROJECT</p>
+        <h4>MMG: Manipulation-Aware Holistic Motion Generation</h4>
+        <p>
+          An academic project for generating manipulation-aware holistic human motion, using HMD sparse tracking signals
+          collected with SteamVR in Unity.
+        </p>
+        <p>
+          My primary role in this project was to design interaction scenarios and workflows, acquire HMD data with SteamVR,
+          integrate the neural network model into Unity, and use its inference results to drive an avatar in interaction experiments.
+        </p>
+        <h5>Features</h5>
+        <ul class="plain-list">
+          <li>SteamVR-based collection pipeline for sparse HMD tracking signals.</li>
+          <li>Interactive Unity scenes for body and hand-object motion experiments.</li>
+          <li>Neural motion inference integrated with real-time avatar control.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="academic-project" id="scene-motion-project">
+      <div class="academic-project__media">
+        <video controls playsinline preload="metadata" aria-label="Human-scene interaction project demo video">
+          <source src="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="academic-project__content">
+        <p class="project-number">02 / ACADEMIC PROJECT</p>
+        <h4>Human&ndash;Scene Interaction Motion Generation</h4>
+        <p>
+          An academic project for generating non-penetration human-scene-interaction motion, using HMD sparse tracking
+          signals collected with SteamVR in Unity.
+        </p>
+        <p>
+          In this project I mainly worked on model network design, all experiments and testing, and model deployment in Unity
+          for interaction experiments.
+        </p>
+        <h5>Features</h5>
+        <ul class="plain-list">
+          <li>Network design for motion estimation in human-scene interactions.</li>
+          <li>End-to-end experiment setup, testing, and result evaluation.</li>
+          <li>Unity deployment for interactive non-penetration motion demonstrations.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="page-section personal-section" aria-labelledby="personal-heading">
+    <div class="section-heading-row">
+      <div>
+        <p class="section-kicker">CREATIVE / TECHNICAL</p>
+        <h3 id="personal-heading">Personal Projects</h3>
+      </div>
+    </div>
+    <p>
+      Mostly focused on VRChat avatar customization and development based on existing base models, with an emphasis on both
+      visual customization and technical development.
+    </p>
+    <ul class="plain-list personal-project-list">
+      <li><strong>Avatar Customization</strong> &mdash; Extensive modifications to character models, clothing, materials, shaders and visual appearance.</li>
+      <li><strong>Tool Development</strong> &mdash; Development of custom tools and utilities to improve and streamline the avatar customization workflow.</li>
+      <li><strong>Feature Development</strong> &mdash; Design and implementation of custom avatar props, features, animations, and interaction logic.</li>
+      <li><strong>Technical Implementation</strong> &mdash; Integration and development of custom shaders, visual effects, control systems, and performance optimizations.</li>
+    </ul>
+
+    <div class="personal-projects-gallery" aria-label="Reserved personal project animation slots">
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+    </div>
+  </section>
+</main>
