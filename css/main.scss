@@ -1431,6 +1431,49 @@ body.is-home-page .content-wrapper {
   }
 }
 
+/* The browser's split-screen content can still be only about 800px wide on
+   a 1328px viewport because the fixed profile rail uses 40% of the screen.
+   Keep the portrait reading order until the content column is genuinely wide. */
+@media all and (min-width: 640px) and (max-width: 1600px) {
+  body:not(.is-home-page) .publication-card--with-teaser {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  body:not(.is-home-page) .publication-card--with-teaser .publication-teaser {
+    display: block;
+    width: 100%;
+    margin: 0 0 1.35em;
+  }
+
+  body:not(.is-home-page) .publication-card--with-teaser .publication-teaser img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  body:not(.is-home-page) .publication-card--with-teaser .publication-card__body {
+    width: 100%;
+  }
+
+  body:not(.is-home-page) .featured-project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    gap: 1.25em;
+  }
+
+  body:not(.is-home-page) .featured-project-grid .project-card:nth-child(n) {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    margin: 0;
+  }
+}
+
 /* At the 700px landscape state, give the navigation rail a real column.
    This keeps its proportions close to the large-landscape version. */
 @media all and (orientation: landscape) and (min-width: 640px) and (max-width: 800px) {
