@@ -2308,3 +2308,46 @@ a:hover {
     grid-row: 2;
   }
 }
+
+/* The split content column is too narrow for a two-card row. Use full-width
+   project cards and a full-width publication teaser until the page reaches
+   the wide desktop layout. This removes the dangling third card and the
+   unused space beside the long teaser figure. */
+@media all and (min-width: 640px) and (max-width: 1300px) {
+  .featured-project-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25em;
+  }
+
+  .featured-project-grid .project-card:nth-child(n) {
+    grid-column: auto;
+    grid-row: auto;
+    margin-top: 0;
+  }
+
+  .publication-card--with-teaser {
+    display: block;
+  }
+
+  .publication-card--with-teaser .publication-teaser {
+    width: 100%;
+    margin-bottom: 1.35em;
+  }
+
+  .publication-card--with-teaser .publication-teaser img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+}
+
+@media all and (max-width: 639px) {
+  .publication-card--with-teaser .publication-teaser img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+}
