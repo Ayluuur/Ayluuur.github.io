@@ -21,34 +21,38 @@ permalink: /portfolio/
     <div class="featured-project-grid">
       <figure class="project-card">
         <div class="project-card__media">
-          <img src="{{ site.baseurl }}/assets/MMG/MMG%20Demo%20only%20for%20work.gif" alt="MMG body and hand-object interaction motion generation demo" loading="lazy">
+          <a class="image-preview-trigger project-card__image-link" href="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-preview.gif" target="_blank" rel="noopener" data-preview-title="Human–Scene Interaction Motion Generation" aria-label="Preview Human–Scene Interaction Motion Generation demo image">
+            <img src="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-preview.gif" alt="Human-scene interaction motion generation demo" loading="lazy">
+          </a>
           <span class="project-card__index">01</span>
         </div>
         <figcaption>
-          <h4>MMG: Holistic Motion Generation</h4>
-          <p>An academic demo for body and hand-object-interaction motion generation developed in Unity.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="project-card">
-        <div class="project-card__media">
-          <img src="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-preview.gif" alt="Human-scene interaction motion generation demo" loading="lazy">
-          <span class="project-card__index">02</span>
-        </div>
-        <figcaption>
-          <h4>Human&ndash;Scene Interaction Motion Generation</h4>
+          <h4><a class="project-card__title-link" href="#scene-motion-project">Human&ndash;Scene Interaction Motion Generation</a></h4>
           <p>An academic demo for human-scene-interaction motion generation developed in Unity.</p>
         </figcaption>
       </figure>
 
       <figure class="project-card">
         <div class="project-card__media">
-          <div class="media-placeholder project-card__placeholder" role="img" aria-label="Placeholder for a VRChat avatar demo"></div>
+          <a class="image-preview-trigger project-card__image-link" href="{{ site.baseurl }}/assets/MMG/MMG%20Demo%20only%20for%20work.gif" target="_blank" rel="noopener" data-preview-title="MMG: Holistic Motion Generation" aria-label="Preview MMG demo image">
+            <img src="{{ site.baseurl }}/assets/MMG/MMG%20Demo%20only%20for%20work.gif" alt="MMG body and hand-object interaction motion generation demo" loading="lazy">
+          </a>
+          <span class="project-card__index">02</span>
+        </div>
+        <figcaption>
+          <h4><a class="project-card__title-link" href="#mmg-project">MMG: Holistic Motion Generation</a></h4>
+          <p>An academic demo for body and hand-object-interaction motion generation developed in Unity.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="project-card">
+        <div class="project-card__media">
+          <div class="media-placeholder project-card__placeholder" role="img" aria-label="Reserved for the Avatar Creations collection"></div>
           <span class="project-card__index">03</span>
         </div>
         <figcaption>
           <h4>Avatar Creations</h4>
-          <p>Expressive avatar models with a distinctive style and a range of custom features.</p>
+          <p>A curated collection of custom avatar work will be added here.</p>
         </figcaption>
       </figure>
     </div>
@@ -63,42 +67,15 @@ permalink: /portfolio/
     </div>
     <p class="section-intro">Projects that were made for the purposes of academic research and display relevant skills.</p>
 
-    <article class="academic-project" id="mmg-project">
-      <div class="academic-project__media">
-        <video controls playsinline preload="metadata" poster="{{ site.baseurl }}/images/mmg-teaser.png" aria-label="MMG project demo video">
-          <source src="{{ site.baseurl }}/assets/MMG/mmg-demo.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <div class="academic-project__content">
-        <p class="project-number">01 / ACADEMIC PROJECT</p>
-        <h4>MMG: Manipulation-Aware Holistic Motion Generation</h4>
-        <p>
-          An academic project for generating manipulation-aware holistic human motion, using HMD sparse tracking signals
-          collected with SteamVR in Unity.
-        </p>
-        <p>
-          My primary role in this project was to design interaction scenarios and workflows, acquire HMD data with SteamVR,
-          integrate the neural network model into Unity, and use its inference results to drive an avatar in interaction experiments.
-        </p>
-        <h5>Features</h5>
-        <ul class="plain-list">
-          <li>SteamVR-based collection pipeline for sparse HMD tracking signals.</li>
-          <li>Interactive Unity scenes for body and hand-object motion experiments.</li>
-          <li>Neural motion inference integrated with real-time avatar control.</li>
-        </ul>
-      </div>
-    </article>
-
     <article class="academic-project" id="scene-motion-project">
       <div class="academic-project__media">
-        <video controls playsinline preload="metadata" aria-label="Human-scene interaction project demo video">
+        <video controls autoplay muted loop playsinline preload="metadata" aria-label="Human-scene interaction project demo video">
           <source src="{{ site.baseurl }}/assets/projects/scene-motion/scene-motion-demo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
       <div class="academic-project__content">
-        <p class="project-number">02 / ACADEMIC PROJECT</p>
+        <p class="project-number">01 / ACADEMIC PROJECT</p>
         <h4>Human&ndash;Scene Interaction Motion Generation</h4>
         <p>
           An academic project for generating non-penetration human-scene-interaction motion, using HMD sparse tracking
@@ -113,6 +90,33 @@ permalink: /portfolio/
           <li>Network design for motion estimation in human-scene interactions.</li>
           <li>End-to-end experiment setup, testing, and result evaluation.</li>
           <li>Unity deployment for interactive non-penetration motion demonstrations.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="academic-project" id="mmg-project">
+      <div class="academic-project__media">
+        <video controls autoplay muted loop playsinline preload="metadata" poster="{{ site.baseurl }}/images/mmg-teaser.png" aria-label="MMG project demo video">
+          <source src="{{ site.baseurl }}/assets/MMG/mmg-demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="academic-project__content">
+        <p class="project-number">02 / ACADEMIC PROJECT</p>
+        <h4>MMG: Manipulation-Aware Holistic Motion Generation</h4>
+        <p>
+          An academic project for generating manipulation-aware holistic human motion, using HMD sparse tracking signals
+          collected with SteamVR in Unity.
+        </p>
+        <p>
+          My primary role in this project was to design interaction scenarios and workflows, acquire HMD data with SteamVR,
+          integrate the neural network model into Unity, and use its inference results to drive an avatar in interaction experiments.
+        </p>
+        <h5>Features</h5>
+        <ul class="plain-list">
+          <li>SteamVR-based collection pipeline for sparse HMD tracking signals.</li>
+          <li>Interactive Unity scenes for body and hand-object motion experiments.</li>
+          <li>Neural motion inference integrated with real-time avatar control.</li>
         </ul>
       </div>
     </article>
@@ -136,13 +140,68 @@ permalink: /portfolio/
       <li><strong>Technical Implementation</strong> &mdash; Integration and development of custom shaders, visual effects, control systems, and performance optimizations.</li>
     </ul>
 
-    <div class="personal-projects-gallery" aria-label="Reserved personal project animation slots">
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
-      <div class="media-placeholder" role="img" aria-label="Reserved avatar animation slot"></div>
+    <div class="personal-projects-gallery" aria-label="VRChat personal project media">
+      <figure class="personal-project-media personal-project-media--video">
+        <div class="personal-project-media__frame">
+          <video autoplay muted loop controls playsinline preload="metadata" aria-label="Sio avatar preview video">
+            <source src="{{ site.baseurl }}/assets/VRCHAT/Sio%20Preview-edit_x264.mp4" type="video/mp4">
+          </video>
+          <span class="personal-project-media__badge">VIDEO</span>
+        </div>
+      </figure>
+
+      <figure class="personal-project-media personal-project-media--video">
+        <div class="personal-project-media__frame">
+          <video autoplay muted loop controls playsinline preload="metadata" aria-label="Shiratsume avatar preview video">
+            <source src="{{ site.baseurl }}/assets/VRCHAT/Shiratsume%20Preview-edit_x264.mp4" type="video/mp4">
+          </video>
+          <span class="personal-project-media__badge">VIDEO</span>
+        </div>
+      </figure>
+
+      <figure class="personal-project-media personal-project-media--video">
+        <div class="personal-project-media__frame">
+          <video autoplay muted loop controls playsinline preload="metadata" aria-label="PMC Shinano avatar preview video">
+            <source src="{{ site.baseurl }}/assets/VRCHAT/PMC%20Shinano%20Preview-edit_x264.mp4" type="video/mp4">
+          </video>
+          <span class="personal-project-media__badge">VIDEO</span>
+        </div>
+      </figure>
+
+      <figure class="personal-project-media personal-project-media--video">
+        <div class="personal-project-media__frame">
+          <video autoplay muted loop controls playsinline preload="metadata" aria-label="Kipfel avatar preview video">
+            <source src="{{ site.baseurl }}/assets/VRCHAT/Kipfel%20Preview-edit_x264.mp4" type="video/mp4">
+          </video>
+          <span class="personal-project-media__badge">VIDEO</span>
+        </div>
+      </figure>
+
+      <figure class="personal-project-media personal-project-media--wide">
+        <div class="personal-project-media__frame">
+          <a class="image-preview-trigger personal-project-media__image-link" href="{{ site.baseurl }}/assets/VRCHAT/表情动画对齐v3.1.png" target="_blank" rel="noopener" data-preview-title="Facial Expression Alignment Toolkit" aria-label="Preview Facial Expression Alignment Toolkit image">
+            <img src="{{ site.baseurl }}/assets/VRCHAT/表情动画对齐v3.1.png" alt="VRChat facial expression alignment toolkit interface" loading="lazy">
+          </a>
+          <span class="personal-project-media__badge">TOOL</span>
+        </div>
+        <figcaption>
+          <strong>Facial Expression Alignment Toolkit</strong>
+          <span>Animation workflow system</span>
+        </figcaption>
+      </figure>
+
+      <figure class="personal-project-media personal-project-media--wide">
+        <div class="personal-project-media__frame">
+          <a class="image-preview-trigger personal-project-media__image-link" href="{{ site.baseurl }}/assets/VRCHAT/预设置亮度v1.png" target="_blank" rel="noopener" data-preview-title="Avatar Luminance Preset Manager" aria-label="Preview Avatar Luminance Preset Manager image">
+            <img src="{{ site.baseurl }}/assets/VRCHAT/预设置亮度v1.png" alt="VRChat avatar luminance preset manager interface" loading="lazy">
+          </a>
+          <span class="personal-project-media__badge">TOOL</span>
+        </div>
+        <figcaption>
+          <strong>Avatar Luminance Preset Manager</strong>
+          <span>Lighting configuration system</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 </main>

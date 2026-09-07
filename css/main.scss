@@ -1032,6 +1032,12 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Texture, focus, and empty-state polish */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background-image: radial-gradient(rgba(63, 116, 131, .055) .7px, transparent .7px);
   background-size: 18px 18px;
@@ -1431,6 +1437,466 @@ body.is-home-page .content-wrapper {
   }
 }
 
+/* Final navigation and rail corrections. Keep these rules last so they win
+   over the legacy breakpoint overrides above. */
+body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+  font-size: .9rem;
+}
+
+@media all and (orientation: landscape) and (min-width: 640px) {
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider {
+    display: block;
+    margin-top: clamp(12px, 1.6vw, 20px);
+    margin-bottom: clamp(12px, 1.6vw, 20px);
+  }
+
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider--secondary {
+    display: block;
+    width: 15%;
+  }
+}
+
+/* A portrait tablet still uses the expandable menu, but its controls should
+   remain compact and balanced instead of inheriting the wide desktop rail. */
+@media all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  body:not(.is-home-page) .navigation-wrapper,
+  body.is-home-page .navigation-wrapper {
+    z-index: 9998;
+    max-height: calc(100dvh - 42px);
+    overflow-y: auto;
+    padding: 18px 16px 20px;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary,
+  body.is-home-page .cover-navigation--primary {
+    display: block;
+    float: none;
+    clear: none;
+    width: 100%;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation,
+  body.is-home-page .cover-navigation--primary .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    gap: .75em;
+    margin: 0 auto;
+    float: none;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item,
+  body.is-home-page .cover-navigation--primary .navigation__item {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+  body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 11px 12px;
+    text-align: center;
+  }
+
+  body:not(.is-home-page) .profile-links,
+  body.is-home-page .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    max-width: none;
+    gap: .65em;
+    margin: 1.15em auto 0;
+  }
+
+  body:not(.is-home-page) .profile-link,
+  body.is-home-page .profile-link {
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+    font-size: .78rem;
+  }
+
+  body:not(.is-home-page) .profile-link span,
+  body.is-home-page .profile-link span {
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
+/* Keep the collapsed content-page rail visually identical to the full cover.
+   The base theme hides these rules at <= 960px, even when the page is in a
+   landscape split-screen layout. */
+@media all and (orientation: landscape) and (min-width: 640px) {
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider {
+    display: block;
+    margin-top: clamp(12px, 1.6vw, 20px);
+    margin-bottom: clamp(12px, 1.6vw, 20px);
+  }
+
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider--secondary {
+    display: block;
+    width: 15%;
+  }
+}
+
+/* Portrait tablets use the mobile menu, but should not inherit the wide
+   desktop grid that makes two huge page buttons and four cramped link pills. */
+@media all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  .navigation-wrapper {
+    z-index: 9998;
+    max-height: calc(100dvh - 42px);
+    overflow-y: auto;
+    padding: 18px 16px 20px;
+  }
+
+  .cover-navigation,
+  .cover-navigation--primary {
+    display: block;
+    float: none;
+    clear: none;
+    width: 100%;
+  }
+
+  .cover-navigation--primary .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    gap: .75em;
+    margin: 0 auto;
+    float: none;
+  }
+
+  .cover-navigation--primary .navigation__item {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .cover-navigation--primary .navigation__item a.page-link-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    font-size: .9rem;
+    text-align: center;
+  }
+
+  .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    max-width: none;
+    gap: .65em;
+    margin: 1.15em auto 0;
+  }
+
+  .profile-link {
+    min-width: 0;
+    min-height: 42px;
+    box-sizing: border-box;
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+    font-size: .78rem;
+  }
+
+  .profile-link span {
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
+/* Use one readable label size for the two primary navigation buttons across
+   desktop, landscape tablets, and the portrait menu. */
+.cover-navigation--primary .navigation__item a.page-link-button {
+  font-size: .9rem;
+}
+
+/* VRChat media gallery */
+.personal-projects-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.15em;
+  margin-top: 1.8em;
+  align-items: start;
+}
+
+.personal-project-media {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+  box-shadow: 0 12px 28px rgba(39, 67, 76, .07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.personal-project-media:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 17px 32px rgba(39, 67, 76, .12);
+}
+
+.personal-project-media--wide {
+  grid-column: span 6;
+}
+
+.personal-project-media--video {
+  grid-column: span 3;
+}
+
+.personal-project-media__frame {
+  position: relative;
+  overflow: hidden;
+  background: #102a34;
+}
+
+.personal-project-media--wide .personal-project-media__frame {
+  aspect-ratio: 16 / 9;
+}
+
+.personal-project-media--video .personal-project-media__frame {
+  aspect-ratio: 9 / 16;
+}
+
+.personal-project-media__frame img,
+.personal-project-media__frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.personal-project-media__frame img {
+  object-fit: contain;
+  background: #e8f0f1;
+}
+
+.personal-project-media__frame video {
+  object-fit: cover;
+  background: #102a34;
+}
+
+.personal-project-media__badge {
+  position: absolute;
+  top: .7em;
+  right: .7em;
+  padding: .28em .5em;
+  border: 1px solid rgba(255, 255, 255, .38);
+  border-radius: 2px;
+  background: rgba(16, 42, 52, .76);
+  color: #fff;
+  font-size: .62em;
+  font-weight: 700;
+  letter-spacing: .12em;
+  pointer-events: none;
+}
+
+.personal-project-media figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .2em .65em;
+  align-items: baseline;
+  padding: .85em .95em .9em;
+}
+
+.personal-project-media figcaption strong {
+  color: var(--ink);
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: .94em;
+  font-weight: 700;
+}
+
+.personal-project-media figcaption span {
+  color: var(--muted);
+  font-size: .78em;
+}
+
+@media all and (max-width: 700px) {
+  .personal-projects-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .85em;
+  }
+
+  .personal-project-media--wide {
+    grid-column: 1 / -1;
+  }
+
+  .personal-project-media--video {
+    grid-column: span 1;
+  }
+
+  .personal-project-media figcaption {
+    display: block;
+    padding: .7em .75em .8em;
+  }
+
+  .personal-project-media figcaption strong,
+  .personal-project-media figcaption span {
+    display: block;
+  }
+
+  .personal-project-media figcaption span {
+    margin-top: .18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .personal-project-media,
+  .project-card {
+    transition: none;
+  }
+}
+
+/* Click-to-preview image treatment */
+.image-preview-trigger {
+  display: block;
+  cursor: zoom-in;
+}
+
+.image-preview-trigger:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid rgba(92, 166, 174, .72);
+  outline-offset: -3px;
+}
+
+.project-card__image-link {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel-main__content > a {
+  display: block;
+  max-width: 100%;
+}
+
+.btn-mobile-menu {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+}
+
+.personal-project-media__image-link {
+  width: 100%;
+  height: 100%;
+}
+
+.project-card__title-link {
+  color: inherit;
+  text-decoration: none;
+  text-decoration-thickness: .08em;
+  text-underline-offset: .16em;
+}
+
+.project-card__title-link:hover,
+.project-card__title-link:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+body.image-lightbox-open {
+  overflow: hidden;
+}
+
+.image-lightbox {
+  position: fixed;
+  z-index: 1200;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(12, 28, 36, .88);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.image-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.image-lightbox__dialog {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  max-height: calc(100vh - 2rem);
+  max-height: 100%;
+  flex-direction: column;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.image-lightbox__image {
+  display: block;
+  width: auto;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: .55rem;
+  right: .65rem;
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(220, 239, 240, .45);
+  border-radius: 50%;
+  background: rgba(12, 28, 36, .35);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.image-lightbox__close:hover,
+.image-lightbox__close:focus-visible {
+  border-color: #fff;
+  background: rgba(92, 166, 174, .42);
+}
+
+@media all and (max-width: 700px) {
+  .image-lightbox {
+    padding: .7rem;
+  }
+
+  .image-lightbox__dialog {
+    max-height: calc(100vh - 1.4rem);
+  }
+
+  .image-lightbox__image {
+    max-width: calc(100vw - 1.4rem);
+    max-height: calc(100vh - 1.4rem);
+  }
+}
+
 /* The browser's split-screen content can still be only about 800px wide on
    a 1328px viewport because the fixed profile rail uses 40% of the screen.
    Keep the portrait reading order until the content column is genuinely wide. */
@@ -1471,6 +1937,78 @@ body.is-home-page .content-wrapper {
     grid-row: auto;
     width: 100%;
     margin: 0;
+  }
+}
+
+/* Last-cascade guard for the navigation fixes above. */
+body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+  font-size: .9rem;
+}
+
+@media all and (orientation: landscape) and (min-width: 640px) {
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider {
+    display: block;
+  }
+
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider--secondary {
+    display: block;
+  }
+}
+
+@media all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  body:not(.is-home-page) .cover-navigation--primary .navigation,
+  body.is-home-page .cover-navigation--primary .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    gap: .75em;
+    margin-right: auto;
+    margin-left: auto;
+    float: none;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item,
+  body.is-home-page .cover-navigation--primary .navigation__item {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+  body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 11px 12px;
+    text-align: center;
+  }
+
+  body:not(.is-home-page) .profile-links,
+  body.is-home-page .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    max-width: none;
+    gap: .65em;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  body:not(.is-home-page) .profile-link,
+  body.is-home-page .profile-link {
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+    font-size: .78rem;
+  }
+
+  body:not(.is-home-page) .profile-link span,
+  body.is-home-page .profile-link span {
+    min-width: 0;
+    white-space: normal;
   }
 }
 
@@ -2177,6 +2715,131 @@ a:hover {
   }
 }
 
+/* Final responsive contract. Keep narrow screens inside the viewport and
+   leave one usable navigation entry point in every mobile orientation. */
+@media all and (max-width: 639px) {
+  .panel-main__inner,
+  .panel-cover.panel-cover--collapsed .panel-main__inner {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .panel-title {
+    max-width: 100%;
+    font-size: clamp(1.5rem, 7vw, 2.1rem);
+    line-height: 1.18;
+    letter-spacing: 1px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .portfolio-page,
+  .page-section,
+  .featured-project-grid,
+  .project-card,
+  .academic-project,
+  .publication-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .project-card__image-link,
+  .project-card__image-link img,
+  .publication-teaser,
+  .publication-teaser img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .project-card:hover .project-card__image-link img {
+    transform: scale(1.03);
+  }
+
+  .project-card figcaption h4 {
+    overflow-wrap: anywhere;
+  }
+
+  .navigation-wrapper {
+    z-index: 9998;
+    max-height: calc(100dvh - 42px);
+    overflow-y: auto;
+    padding: 16px;
+  }
+
+  .btn-mobile-menu {
+    min-width: 44px;
+    min-height: 42px;
+  }
+}
+
+@media all and (orientation: landscape) and (min-width: 640px) and (max-width: 800px) {
+  /* The compact home cover cannot show its full navigation row safely; the
+     menu button must remain available instead of hiding both controls. */
+  body.is-home-page .btn-mobile-menu {
+    display: block;
+  }
+
+  body.is-home-page .navigation-wrapper {
+    display: none;
+    position: fixed;
+    top: 42px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: calc(100dvh - 42px);
+    overflow-y: auto;
+    padding: 16px;
+    background: rgba(15, 42, 52, .98);
+    border-bottom: 1px solid rgba(220, 239, 240, .2);
+  }
+
+  body.is-home-page .navigation-wrapper.visible {
+    display: block;
+  }
+
+  body.is-home-page .cover-navigation--primary .navigation {
+    display: block;
+    width: 100%;
+  }
+
+  body.is-home-page .cover-navigation--primary .navigation__item,
+  body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+    width: 100%;
+  }
+
+  body.is-home-page .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: .55em;
+  }
+
+  body.is-home-page .profile-link {
+    min-width: 0;
+    padding: 7px !important;
+    border-radius: 4px !important;
+    font-size: .68em;
+  }
+
+  body.is-home-page .profile-link span {
+    white-space: normal;
+  }
+}
+
+@media all and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .image-lightbox,
+  .project-card,
+  .personal-project-media,
+  .profile-link,
+  .page-link-button {
+    transition: none;
+  }
+}
+
 /* Canonical landscape page rail. Keep the large-landscape composition at
    smaller landscape widths, with a flexible rail that never overlaps links. */
 @media all and (orientation: landscape) and (min-width: 640px) and (max-width: 1300px) {
@@ -2392,6 +3055,108 @@ a:hover {
     height: auto;
     aspect-ratio: auto;
     object-fit: contain;
+  }
+}
+
+/* Portrait tablet academic cards read in the same order as the narrow layout:
+   video first, followed by the project copy. */
+@media all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  .academic-project {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+  }
+
+  .academic-project__media {
+    position: static;
+    order: -1;
+    width: 100%;
+  }
+
+  .academic-project__content {
+    order: 0;
+    width: 100%;
+  }
+
+  .academic-project__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Final cascade guard for navigation geometry. */
+body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+  font-size: .9rem;
+}
+
+/* Keep the content-page hero title stable across the split-screen breakpoints. */
+.page-hero h2 {
+  font-size: 3rem;
+}
+
+@media all and (orientation: landscape) and (min-width: 640px) {
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider {
+    display: block;
+  }
+
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-cover__divider--secondary {
+    display: block;
+  }
+}
+
+@media all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  body:not(.is-home-page) .cover-navigation--primary .navigation,
+  body.is-home-page .cover-navigation--primary .navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    gap: .75em;
+    margin: 0 auto;
+    float: none;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item,
+  body.is-home-page .cover-navigation--primary .navigation__item {
+    width: auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  body:not(.is-home-page) .cover-navigation--primary .navigation__item a.page-link-button,
+  body.is-home-page .cover-navigation--primary .navigation__item a.page-link-button {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 11px 12px;
+    text-align: center;
+  }
+
+  body:not(.is-home-page) .profile-links,
+  body.is-home-page .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 560px);
+    max-width: none;
+    gap: .65em;
+    margin: 1.15em auto 0;
+  }
+
+  body:not(.is-home-page) .profile-link,
+  body.is-home-page .profile-link {
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+    font-size: .78rem;
+  }
+
+  body:not(.is-home-page) .profile-link span,
+  body.is-home-page .profile-link span {
+    min-width: 0;
+    white-space: normal;
   }
 }
 
