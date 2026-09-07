@@ -3,15 +3,19 @@ layout: null
 sitemap:
   exclude: 'yes'
 ---
-function toggleMobileMenu() {
-  var isOpen = !$('.navigation-wrapper').hasClass('visible');
-
-  $('.navigation-wrapper').toggleClass('visible', isOpen);
+function setMobileMenu(isOpen) {
+  $('.navigation-wrapper')
+    .toggleClass('visible', isOpen)
+    .toggleClass('animated bounceInDown', isOpen);
   $('.btn-mobile-menu__icon').toggleClass('hidden', isOpen);
   $('.btn-mobile-close__icon').toggleClass('hidden', !isOpen);
   $('.btn-mobile-menu')
     .attr('aria-expanded', isOpen ? 'true' : 'false')
     .attr('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+}
+
+function toggleMobileMenu() {
+  setMobileMenu(!$('.navigation-wrapper').hasClass('visible'));
 }
 
 function revealContent() {
@@ -136,10 +140,33 @@ $(document).ready(function () {
   }
 
   $('.btn-mobile-menu').click(function () {
-    if (!$('.navigation-wrapper').hasClass('animated bounceInDown')) {
-      $('.navigation-wrapper').addClass('animated bounceInDown');
-    }
     toggleMobileMenu();
+  });
+
+  var viewportWidth = window.innerWidth;
+
+  $(window).on('resize.mobileMenu', function () {
+    var nextViewportWidth = window.innerWidth;
+
+    if (Math.abs(nextViewportWidth - viewportWidth) < 1) {
+      return;
+    }
+
+    viewportWidth = nextViewportWidth;
+
+    // Browser zoom and device rotation both change the CSS viewport width.
+    // Reset an open overlay before the new responsive mode is painted so a
+    // mobile menu cannot remain on top of a desktop/tablet composition.
+    if ($('.navigation-wrapper').hasClass('visible')) {
+      setMobileMenu(false);
+    }
+  });
+
+  $(document).on('keydown.mobileMenu', function (event) {
+    if (event.key === 'Escape' && $('.navigation-wrapper').hasClass('visible')) {
+      setMobileMenu(false);
+      $('.btn-mobile-menu').trigger('focus');
+    }
   });
 
   initImageLightbox();

@@ -1,0 +1,95 @@
+/* Responsive invariants
+   ---------------------
+   Browser zoom changes the CSS viewport, so every split-screen rule must use
+   the same rail measurement. Previously the cover stopped at 530px while the
+   content kept a 40vw offset, leaving a widening dead strip above ~1325px. */
+@media all and (min-width: 961px),
+       all and (orientation: landscape) and (min-width: 640px) {
+  body:not(.is-home-page) {
+    --profile-rail-width: clamp(350px, 40vw, 530px);
+  }
+
+  body:not(.is-home-page) .panel-cover,
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed {
+    width: var(--profile-rail-width);
+    max-width: none;
+    overflow-x: hidden;
+  }
+
+  body:not(.is-home-page) .content-wrapper {
+    width: calc(100% - var(--profile-rail-width));
+    max-width: none;
+    margin-right: 0;
+    margin-left: var(--profile-rail-width);
+  }
+
+  body:not(.is-home-page) .panel-main {
+    display: flex;
+    min-height: 100dvh;
+    align-items: safe center;
+  }
+
+  body:not(.is-home-page) .panel-cover.panel-cover--collapsed .panel-main__inner {
+    display: block;
+    width: 100%;
+    padding: clamp(20px, 4vh, 42px) clamp(20px, 3vw, 42px);
+    margin-block: auto;
+  }
+
+  body:not(.is-home-page) .panel-main__content {
+    width: 100%;
+    max-width: 390px;
+    margin: 0 auto;
+  }
+
+  body:not(.is-home-page) .panel-title {
+    max-width: 100%;
+    font-size: clamp(1.55rem, 2.55vw, 2.2rem);
+    letter-spacing: clamp(.5px, .12vw, 1px);
+    white-space: nowrap;
+  }
+
+  body:not(.is-home-page) .navigation-wrapper {
+    display: block;
+    position: static;
+    width: 100%;
+  }
+
+  body:not(.is-home-page) .profile-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: none;
+  }
+
+  body:not(.is-home-page) .btn-mobile-menu {
+    display: none;
+  }
+}
+
+/* In the actual mobile-menu mode, keep the sheet below its control. This
+   query deliberately mirrors the inverse of the split-screen contract. */
+@media all and (max-width: 639px),
+       all and (orientation: portrait) and (min-width: 640px) and (max-width: 960px) {
+  body:not(.is-home-page) .navigation-wrapper,
+  body.is-home-page .navigation-wrapper {
+    display: none;
+    position: fixed;
+    z-index: 9998;
+    top: 42px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: calc(100dvh - 42px);
+    overflow-y: auto;
+  }
+
+  body:not(.is-home-page) .navigation-wrapper.visible,
+  body.is-home-page .navigation-wrapper.visible {
+    display: block;
+  }
+
+  .btn-mobile-menu {
+    z-index: 9999;
+  }
+}
