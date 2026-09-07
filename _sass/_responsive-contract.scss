@@ -1,3 +1,105 @@
+/* Content-card invariants. These compositions do not change at breakpoints. */
+.publication-card--with-teaser {
+  display: flex;
+  grid-template-columns: none;
+  flex-direction: column;
+  gap: 0;
+}
+
+.publication-card--with-teaser .publication-teaser {
+  display: block;
+  width: 100%;
+  margin: 0 0 1.35em;
+}
+
+.publication-card--with-teaser .publication-teaser img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.publication-card--with-teaser .publication-card__body {
+  width: 100%;
+}
+
+.featured-project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-flow: row;
+  gap: 1.25em;
+  margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
+.featured-project-grid .project-card:nth-child(n) {
+  grid-column: 1;
+  grid-row: auto;
+  width: 100%;
+  margin: 0;
+}
+
+.academic-project {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.academic-project .academic-project__media {
+  position: static;
+  order: -1;
+  width: 100%;
+}
+
+.academic-project .academic-project__content {
+  order: 0;
+  width: 100%;
+}
+
+.academic-project .academic-project__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* The two source images have different ratios. A shared 19:10 frame limits
+   cropping on both while keeping the toolkit cards exactly the same size. */
+.personal-project-media--tool-image {
+  align-self: stretch;
+}
+
+.personal-project-media--tool-image .personal-project-media__frame {
+  aspect-ratio: 19 / 10;
+  background: #3b3b3b;
+}
+
+.personal-project-media--tool-image .personal-project-media__image-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.personal-project-media--tool-image .personal-project-media__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+.personal-project-media--luminance .personal-project-media__frame img {
+  object-position: center 65%;
+}
+
+.personal-project-media--tool-image figcaption {
+  box-sizing: border-box;
+  min-height: 4.5rem;
+  align-content: center;
+}
+
 /* Responsive invariants
    ---------------------
    Browser zoom changes the CSS viewport, so every split-screen rule must use
