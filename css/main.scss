@@ -3203,4 +3203,68 @@ body.is-home-page .cover-navigation--primary .navigation__item a.page-link-butto
   }
 }
 
+/* Avatar Creations crossfade. The 21:10 frame keeps a narrow fill band around
+   both source ratios while preserving every portrait in each collage. */
+.avatar-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 10;
+  overflow: hidden;
+  background: #172127;
+  isolation: isolate;
+}
+
+.avatar-carousel__slide {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .9s ease-in-out, transform .35s ease;
+}
+
+.avatar-carousel__slide.is-active {
+  z-index: 1;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.avatar-carousel__slide:focus-visible {
+  position: absolute;
+}
+
+.project-card:hover .avatar-carousel__slide {
+  transform: scale(1.025);
+}
+
+.project-card .avatar-carousel__backdrop,
+.project-card .avatar-carousel__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.project-card .avatar-carousel__backdrop {
+  z-index: 0;
+  object-fit: cover;
+  transform: scale(1.08);
+  filter: blur(14px) brightness(.58) saturate(.82);
+}
+
+.project-card .avatar-carousel__image {
+  z-index: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(8, 15, 19, .24));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-carousel__slide {
+    transition: none;
+  }
+}
+
 @import "responsive-contract";

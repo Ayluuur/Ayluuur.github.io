@@ -6,3 +6,24 @@ assets/*.txt
 assets/projects/scene-motion/scene-motion-preview_x264.mp4
 gcm-diagnose.log
 Thumbs.db
+
+# Jekyll / Sass
+.sass-cache/
+.jekyll-metadata
+.bundle/
+vendor/bundle/
+
+# IDE
+.idea/
+*.code-workspace
+
+# Editor temporary files
+*.swp
+*.swo
+*.tmp
+*.bak
+*~
+
+# Windows
+desktop.ini
+ehthumbs.db

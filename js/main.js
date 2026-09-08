@@ -47,6 +47,69 @@ function scrollToSection(hash) {
   }, 420);
 }
 
+function initAvatarCarousel() {
+  var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  $('.avatar-carousel').each(function () {
+    var $carousel = $(this);
+    var $slides = $carousel.find('.avatar-carousel__slide');
+    var activeIndex = 0;
+    var rotationTimer = null;
+
+    if ($slides.length < 2) {
+      return;
+    }
+
+    function showSlide(index) {
+      $slides
+        .removeClass('is-active')
+        .attr({'aria-hidden': 'true', 'tabindex': '-1'});
+
+      $slides.eq(index)
+        .addClass('is-active')
+        .removeAttr('aria-hidden')
+        .attr('tabindex', '0');
+
+      activeIndex = index;
+    }
+
+    function stopRotation() {
+      if (rotationTimer) {
+        window.clearInterval(rotationTimer);
+        rotationTimer = null;
+      }
+    }
+
+    function startRotation() {
+      if (prefersReducedMotion || rotationTimer) {
+        return;
+      }
+
+      rotationTimer = window.setInterval(function () {
+        showSlide((activeIndex + 1) % $slides.length);
+      }, 3000);
+    }
+
+    showSlide(0);
+    startRotation();
+
+    $carousel.on('mouseenter.avatarCarousel focusin.avatarCarousel', stopRotation);
+    $carousel.on('resume.avatarCarousel', startRotation);
+    $carousel.on('mouseleave.avatarCarousel', function () {
+      if (!$carousel.find(':focus').length) {
+        startRotation();
+      }
+    });
+    $carousel.on('focusout.avatarCarousel', function () {
+      window.setTimeout(function () {
+        if (!$carousel.find(':focus').length && !$carousel.is(':hover')) {
+          startRotation();
+        }
+      }, 0);
+    });
+  });
+}
+
 function initImageLightbox() {
   var $triggers = $('.image-preview-trigger');
 
@@ -78,13 +141,19 @@ function initImageLightbox() {
 
     if (lastTrigger) {
       $(lastTrigger).trigger('focus');
+      $(lastTrigger).closest('.avatar-carousel').trigger('resume.avatarCarousel');
       lastTrigger = null;
     }
   }
 
   $triggers.on('click.imageLightbox', function (event) {
     var $trigger = $(this);
-    var $sourceImage = $trigger.find('img');
+    var $sourceImage = $trigger.find('.avatar-carousel__image').first();
+
+    if (!$sourceImage.length) {
+      $sourceImage = $trigger.find('img').first();
+    }
+
     var title = $trigger.attr('data-preview-title') || $sourceImage.attr('alt') || 'Image preview';
 
     event.preventDefault();
@@ -169,5 +238,6 @@ $(document).ready(function () {
     }
   });
 
+  initAvatarCarousel();
   initImageLightbox();
 });
