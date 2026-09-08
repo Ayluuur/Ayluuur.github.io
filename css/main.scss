@@ -3267,4 +3267,17 @@ body.is-home-page .cover-navigation--primary .navigation__item a.page-link-butto
   }
 }
 
+/* Native video fullscreen must preserve portrait footage instead of inheriting
+   the gallery thumbnail's cover crop. */
+.personal-project-media__frame video:fullscreen,
+.personal-project-media__frame video:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  background: #000;
+  object-fit: contain;
+}
+
 @import "responsive-contract";
