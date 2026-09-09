@@ -3294,4 +3294,71 @@ body.is-home-page .cover-navigation--primary .navigation__item a.page-link-butto
   object-fit: contain;
 }
 
+/* Preserve the original Uno Timeline page reveal after the navigation was
+   split into standalone About and Portfolio URLs. On split-screen layouts the
+   full cover contracts into the profile rail, uncovering content right-to-left;
+   compact layouts retain the theme's slide-in animation. */
+body.is-inline-page-transition {
+  overflow-x: hidden;
+}
+
+body.is-inline-page-transition .panel-cover {
+  transition: width .45s ease, max-width .45s ease, box-shadow .45s ease;
+}
+
+body.is-inline-page-preparing .panel-cover {
+  transition: none;
+}
+
+body.is-page-loading .page-link-button[aria-busy="true"] {
+  cursor: progress;
+}
+
+body.is-content-page-transition {
+  overflow-x: hidden;
+}
+
+#main-content.is-page-leaving {
+  animation: contentPageLeave .18s ease-in both;
+  pointer-events: none;
+}
+
+#main-content.is-page-entering {
+  animation: contentPageEnter .4s cubic-bezier(.22, .72, .26, 1) both;
+}
+
+@keyframes contentPageLeave {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-44px);
+  }
+}
+
+@keyframes contentPageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(72px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-inline-page-transition .panel-cover,
+  body.is-inline-page-transition .content-wrapper,
+  #main-content.is-page-leaving,
+  #main-content.is-page-entering {
+    transition: none;
+    animation: none;
+  }
+}
+
 @import "responsive-contract";

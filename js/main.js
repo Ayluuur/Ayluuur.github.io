@@ -47,6 +47,237 @@ function scrollToSection(hash) {
   }, 420);
 }
 
+function initInlinePageNavigation() {
+  var isLoadingPage = false;
+  var participatesInInlineHistory = Boolean(window.history.state && window.history.state.inlinePage);
+
+  function isModifiedClick(event) {
+    return event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+  }
+
+  function usesCompactLayout() {
+    return window.matchMedia && window.matchMedia(
+      '(max-width: 639px), (orientation: portrait) and (min-width: 640px) and (max-width: 960px)'
+    ).matches;
+  }
+
+  function finishReveal($link, $content, $wrapper, delay) {
+    window.setTimeout(function () {
+      $('body').removeClass('is-page-loading is-inline-page-transition is-inline-page-preparing');
+      $('.panel-cover').css({'width': '', 'max-width': ''});
+      $wrapper.removeClass('animated slideInRight');
+      $link.removeAttr('aria-busy');
+      isLoadingPage = false;
+      $content.trigger('focus');
+    }, delay);
+  }
+
+  function focusWithoutScrolling($content) {
+    if (!$content.length) {
+      return;
+    }
+
+    $content[0].focus({preventScroll: true});
+  }
+
+  function positionAtContent($content) {
+    if (!$content.length) {
+      return;
+    }
+
+    $content[0].scrollIntoView({behavior: 'auto', block: 'start', inline: 'nearest'});
+  }
+
+  function installPage(nextDocument, nextContent, targetUrl, $link, $content, resetScrollPosition) {
+    // Stop timers owned by content that is about to leave the document.
+    $('.avatar-carousel').trigger('mouseenter.avatarCarousel');
+
+    $content.html(nextContent.innerHTML);
+    document.title = nextDocument.title || document.title;
+
+    $('.page-link-button')
+      .removeClass('is-active')
+      .removeAttr('aria-current');
+    $link
+      .addClass('is-active')
+      .attr('aria-current', 'page');
+
+    if ($('.navigation-wrapper').hasClass('visible')) {
+      setMobileMenu(false);
+    }
+
+    window.history.pushState(
+      {inlinePage: true},
+      document.title,
+      targetUrl.pathname + targetUrl.search + targetUrl.hash
+    );
+    participatesInInlineHistory = true;
+
+    if (resetScrollPosition) {
+      window.scrollTo(0, 0);
+    }
+
+    initAvatarCarousel();
+    initImageLightbox();
+  }
+
+  function switchContentPage(nextDocument, nextContent, targetUrl, $link, $content, prefersReducedMotion) {
+    var $body = $('body');
+
+    function showNextPage() {
+      installPage(nextDocument, nextContent, targetUrl, $link, $content, false);
+      $body.addClass('is-inline-page');
+      positionAtContent($content);
+
+      if (prefersReducedMotion) {
+        $body.removeClass('is-page-loading');
+        $link.removeAttr('aria-busy');
+        isLoadingPage = false;
+        focusWithoutScrolling($content);
+        return;
+      }
+
+      $content.removeClass('is-page-leaving is-page-entering');
+      $content[0].offsetWidth;
+      $content.addClass('is-page-entering');
+
+      window.setTimeout(function () {
+        $content.removeClass('is-page-entering');
+        $body.removeClass('is-page-loading is-content-page-transition');
+        $link.removeAttr('aria-busy');
+        isLoadingPage = false;
+        focusWithoutScrolling($content);
+      }, 430);
+    }
+
+    if (prefersReducedMotion) {
+      showNextPage();
+      return;
+    }
+
+    $body.addClass('is-content-page-transition');
+    $content.addClass('is-page-leaving');
+    window.setTimeout(showNextPage, 180);
+  }
+
+  $('.page-link-button').on('click.inlinePageNavigation', function (event) {
+    var $body = $('body');
+    var link = this;
+    var startedOnHome = $body.hasClass('is-home-page');
+
+    if (isModifiedClick(event) || link.target || !window.fetch || !window.DOMParser) {
+      return;
+    }
+
+    var targetUrl = new URL(link.href, window.location.href);
+
+    if (targetUrl.origin !== window.location.origin) {
+      return;
+    }
+
+    if (targetUrl.pathname === window.location.pathname && targetUrl.search === window.location.search) {
+      event.preventDefault();
+
+      if ($('.navigation-wrapper').hasClass('visible')) {
+        setMobileMenu(false);
+      }
+
+      return;
+    }
+
+    if (isLoadingPage) {
+      event.preventDefault();
+      return;
+    }
+
+    event.preventDefault();
+    isLoadingPage = true;
+
+    var $link = $(link);
+    var $panel = $('.panel-cover');
+    var $wrapper = $('.content-wrapper');
+    var $content = $('#main-content');
+    var startWidth = $panel[0].getBoundingClientRect().width;
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    $body.addClass('is-page-loading');
+    $link.attr('aria-busy', 'true');
+
+    window.fetch(targetUrl.href, {credentials: 'same-origin'})
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Unable to load page: ' + response.status);
+        }
+
+        return response.text();
+      })
+      .then(function (html) {
+        var nextDocument = new window.DOMParser().parseFromString(html, 'text/html');
+        var nextContent = nextDocument.querySelector('#main-content');
+
+        if (!nextContent) {
+          throw new Error('The requested page has no main content.');
+        }
+
+        if (!startedOnHome) {
+          switchContentPage(nextDocument, nextContent, targetUrl, $link, $content, prefersReducedMotion);
+          return;
+        }
+
+        installPage(nextDocument, nextContent, targetUrl, $link, $content, true);
+        $wrapper.addClass('showing');
+
+        if (prefersReducedMotion) {
+          $panel.addClass('panel-cover--collapsed');
+          $body.removeClass('is-home-page is-page-loading').addClass('is-inline-page');
+          $link.removeAttr('aria-busy');
+          isLoadingPage = false;
+          $content.trigger('focus');
+          return;
+        }
+
+        if (usesCompactLayout()) {
+          $panel.addClass('panel-cover--collapsed');
+          $wrapper.addClass('animated slideInRight');
+          $body
+            .removeClass('is-home-page')
+            .addClass('is-inline-page is-inline-page-transition');
+          finishReveal($link, $content, $wrapper, 1050);
+          return;
+        }
+
+        // Match the original theme's desktop reveal: hold the cover at its
+        // full width, calculate the responsive rail width, then uncover the
+        // content from right to left as the cover contracts.
+        $body
+          .removeClass('is-home-page')
+          .addClass('is-inline-page is-inline-page-transition is-inline-page-preparing');
+        $panel.addClass('panel-cover--collapsed');
+
+        var targetWidth = $panel[0].getBoundingClientRect().width;
+
+        $panel.css({'width': startWidth + 'px', 'max-width': 'none'});
+        $panel[0].offsetWidth;
+        $body.removeClass('is-inline-page-preparing');
+
+        window.requestAnimationFrame(function () {
+          $panel.css('width', targetWidth + 'px');
+        });
+
+        finishReveal($link, $content, $wrapper, 500);
+      })
+      .catch(function () {
+        window.location.assign(targetUrl.href);
+      });
+  });
+
+  window.addEventListener('popstate', function (event) {
+    if (participatesInInlineHistory || $('body').hasClass('is-inline-page') || (event.state && event.state.inlinePage)) {
+      window.location.reload();
+    }
+  });
+}
+
 function initAvatarCarousel() {
   var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -112,6 +343,10 @@ function initAvatarCarousel() {
 
 function initImageLightbox() {
   var $triggers = $('.image-preview-trigger');
+
+  $('.image-lightbox').remove();
+  $('body').removeClass('image-lightbox-open');
+  $(document).off('keydown.imageLightbox');
 
   if (!$triggers.length) {
     return;
@@ -187,6 +422,8 @@ function initImageLightbox() {
 }
 
 $(document).ready(function () {
+  initInlinePageNavigation();
+
   $('a.panel-button').click(function (event) {
     var hash = this.hash;
     if (!hash || !$(hash).length) {
