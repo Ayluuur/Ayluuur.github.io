@@ -408,10 +408,42 @@ function initImageLightbox() {
     closeLightbox();
   });
 
-  $lightbox.on('click.imageLightbox', function (event) {
-    if (event.target === this) {
-      closeLightbox();
+  function clickLandsOnImageContent(event) {
+    var image = $image[0];
+
+    if (event.target !== image || !image.naturalWidth || !image.naturalHeight) {
+      return false;
     }
+
+    // The <img> fills the dialog while object-fit: contain can leave empty
+    // bands around the rendered bitmap. Treat those bands as backdrop too.
+    var bounds = image.getBoundingClientRect();
+    var sourceRatio = image.naturalWidth / image.naturalHeight;
+    var boxRatio = bounds.width / bounds.height;
+    var renderedWidth = bounds.width;
+    var renderedHeight = bounds.height;
+
+    if (sourceRatio > boxRatio) {
+      renderedHeight = renderedWidth / sourceRatio;
+    } else {
+      renderedWidth = renderedHeight * sourceRatio;
+    }
+
+    var renderedLeft = bounds.left + (bounds.width - renderedWidth) / 2;
+    var renderedTop = bounds.top + (bounds.height - renderedHeight) / 2;
+
+    return event.clientX >= renderedLeft &&
+      event.clientX <= renderedLeft + renderedWidth &&
+      event.clientY >= renderedTop &&
+      event.clientY <= renderedTop + renderedHeight;
+  }
+
+  $lightbox.on('click.imageLightbox', function (event) {
+    if ($(event.target).closest('.image-lightbox__close').length || clickLandsOnImageContent(event)) {
+      return;
+    }
+
+    closeLightbox();
   });
 
   $(document).on('keydown.imageLightbox', function (event) {
@@ -447,6 +479,20 @@ $(document).ready(function () {
 
   $('.btn-mobile-menu').click(function () {
     toggleMobileMenu();
+  });
+
+  $(document).on('click.mobileMenuDismiss', function (event) {
+    if (!$('.navigation-wrapper').hasClass('visible')) {
+      return;
+    }
+
+    // Clicks on the toggle or inside the open sheet belong to the menu.
+    // Any other click is an explicit request to dismiss the overlay.
+    if ($(event.target).closest('.btn-mobile-menu, .navigation-wrapper').length) {
+      return;
+    }
+
+    setMobileMenu(false);
   });
 
   var viewportWidth = window.innerWidth;
